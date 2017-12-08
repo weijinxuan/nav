@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul {
+            list-style: none
+        }
+
+        body {
+            background-color: #333;
+        }
+
+        .nav {
+            width: 800px;
+            height: 42px;
+            margin: 100px auto;
+            background: url(images/rss.png) right center no-repeat;
+            background-color: #fff;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .nav li {
+            width: 83px;
+            height: 42px;
+            text-align: center;
+            line-height: 42px;
+            float: left;
+            cursor: pointer;
+        }
+
+        .nav span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+        }
+
+        ul {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <span id="cloud"></span>
+    <ul id="navBar">
+        <li>刘德华</li>
+        <li>周星驰</li>
+        <li>李连杰</li>
+        <li>刘青云</li>
+        <li>张家辉</li>
+        <li>任达华</li>
+        <li>吴孟达</li>
+        <li>谢霆锋</li>
+    </ul>
+</div>
+<script>
+    var squan=0;
+    var timer;
+    var cloud=document.getElementById("cloud");
+    var navBar=document.getElementById("navBar");
+    var lis=navBar.children;
+    for (var i = 0; i < lis.length; i++) {
+       lis[i].onmouseover=function(){
+            animate(cloud,this.offsetLeft)
+       }
+       lis[i].onmouseout=function(){
+            animate(cloud,squan);
+        }
+        lis[i].onclick=function(){
+            squan=this.offsetLeft;
+        }
+
+
+
+    }
+
+
+
+    function animate(obj,target){
+        clearInterval(obj.timer);
+        obj.timer=setInterval(function(){
+            leader=obj.offsetLeft;
+            //var target=400;
+            var step=(target-leader)/10;
+            step=step>0?Math.ceil(step):Math.floor(step);
+            leader=leader+step;
+            obj.style.left=leader+"px";
+            if(leader==target){
+                clearInterval(obj,timer);
+            }
+
+        },1000/60)
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //function animate(obj,attr, target) {
+    //    clearInterval(obj.timer);
+    //    obj.timer = setInterval(function () {
+    //        var leader = parseInt(getStyle(obj,attr)) ||0;
+    //        var step = (target - leader) / 10;
+    //        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    //        leader = leader + step;
+    //        obj.style[attr] = leader + "px";
+    //        if (leader === target) {
+    //            clearInterval(obj.timer);
+    //        }
+    //    }, 15);
+    //}
+    //function getStyle(obj,attr){
+    //    if(window.getComputedStyle){
+    //        return window.getComputedStyle(obj,null)[attr];
+    //    }else{
+    //        return obj.currentStyle[attr];
+    //    }
+//
+//
+    //}
+//
+</script>
+
+</body>
+</html>
